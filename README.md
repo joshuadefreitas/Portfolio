@@ -30,10 +30,7 @@ Welcome to my **Data Science & Analytics Portfolio** — a curated collection of
 ### 📈 1. Time Series Forecasting — Remittances to Mexico  
 **Tools:** R, stats, forecast, ggplot2  
 **Techniques:** SARIMA, decomposition, differencing, prediction  
-🔗 [View project folder](./forecasting-remittances)  
-<p align="center">
-  <img src="IMAGE_LINK_HERE" width="70%"/>
-</p>
+🔗 [View project folder](./forecasting-remittances) 
 
 ---
 
