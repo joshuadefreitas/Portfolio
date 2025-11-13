@@ -1,16 +1,8 @@
-<!-- ======================= -->
-<!--      PORTFOLIO HEADER   -->
-<!-- ======================= -->
-
 <p align="center">
   <img src="./Banner.png" width="88%" style="border-radius: 12px;" alt="Joshua de Freitas — Data & AI Portfolio Banner"/>
 </p>
 
 <br><br>
-
-<!-- ======================= -->
-<!--        TITLE & TAGLINE  -->
-<!-- ======================= -->
 
 <h1 align="center" style="color:#f97316; font-weight:800; font-size: 42px;">
   Joshua de Freitas
@@ -34,10 +26,6 @@
 
 ---
 
-<!-- ======================= -->
-<!--       TECH STACK        -->
-<!-- ======================= -->
-
 <h2 style="color:#f97316;">⚙️ Tech Stack</h2>
 
 <div align="center">
@@ -52,10 +40,6 @@
 <br><br>
 
 ---
-
-<!-- ======================= -->
-<!--       FEATURED WORK     -->
-<!-- ======================= -->
 
 <h2 style="color:#f97316;">📂 Featured Projects</h2>
 
@@ -77,7 +61,7 @@ A full forecasting workflow analyzing monthly remittance flows to Mexico.
 ---
 
 <!-- PROJECT 2 -->
-<h3 style="color:#fff;">🧠 2. AI Document Intelligence Platform — Invoice & Contract Processing</h3>
+<h3 style="color:#fff;">🧠 2. AI Document Intelligence Platform — Invoice & Contract Processing <i>(in progress)</i></h3>
 
 <p style="color:#9ca3af;">
 A modular data + AI platform combining ETL pipelines, document intelligence, analytics, 
@@ -105,24 +89,63 @@ and a FastAPI backend. Built as the foundation for a scalable enterprise documen
 ---
 
 <!-- PROJECT 3 -->
-<h3 style="color:#fff;">📉 3. Market Microstructure Analytics — Futures Tick Data <i>(coming soon)</i></h3>
+<h3 style="color:#fff;">📉 3. DeepLOB — Deep Learning on Limit Order Books <i>(coming soon)</i></h3>
 
 <p style="color:#9ca3af;">
-A deep-dive into intraday price dynamics and predictive microstructure signals.  
+A deep learning model to forecast short-horizon mid-price movements using limit order book (LOB) data.  
+Inspired by research such as <i>DeepLOB</i>, this project combines market microstructure with modern deep learning.
 </p>
 
-**Includes:**
-- Tick data ingestion (parquet pipeline)  
-- Order book imbalance & microprice features  
-- Ultra-short horizon alpha tests  
-- Vectorized Python backtesting  
+**Planned components:**
+- LOB tensor construction (multi-level bid/ask snapshots)  
+- PyTorch dataset & dataloader pipeline  
+- CNN + LSTM / Temporal CNN architectures  
+- GPU-accelerated training & evaluation  
+- Signal backtesting over short horizons  
 
 <br>
 
 ---
 
 <!-- PROJECT 4 -->
-<h3 style="color:#fff;">🔍 4. Statistical Modeling Suite <i>(coming soon)</i></h3>
+<h3 style="color:#fff;">🤖 4. Reinforcement Learning Agent for Futures Trading <i>(coming soon)</i></h3>
+
+<p style="color:#9ca3af;">
+An RL-based agent that interacts with a simulated futures market environment to learn position-taking, 
+holding, and liquidation decisions under risk constraints.
+</p>
+
+**Planned components:**
+- Custom trading environment (Gym-style)  
+- State space with returns, volatility, microstructure features  
+- PPO / SAC agent implementations  
+- Reward shaping for Sharpe, drawdown, and slippage  
+- Evaluation vs. simple benchmark strategies  
+
+<br>
+
+---
+
+<!-- PROJECT 5 -->
+<h3 style="color:#fff;">🌌 5. Generative Market Simulator — GANs & Diffusion for Synthetic Time Series <i>(coming soon)</i></h3>
+
+<p style="color:#9ca3af;">
+A generative modeling project for financial markets, using deep generative models to create realistic synthetic 
+price paths, volatility regimes, and stress scenarios for backtesting and risk research.
+</p>
+
+**Planned components:**
+- GAN- or diffusion-based time series generator (PyTorch)  
+- Regime-aware modeling (calm vs stress periods)  
+- Metrics for realism and calibration  
+- Use cases for backtest robustness & scenario analysis  
+
+<br>
+
+---
+
+<!-- PROJECT 6 -->
+<h3 style="color:#fff;">🔍 6. Statistical Modeling Suite <i>(coming soon)</i></h3>
 
 <p style="color:#9ca3af;">
 A curated collection of mathematical modeling notebooks demonstrating statistical rigor and clarity.  
@@ -130,30 +153,14 @@ A curated collection of mathematical modeling notebooks demonstrating statistica
 
 **Planned modules:**
 - Logistic regression from scratch  
-- Gibbs sampler  
-- ARMA & ARCH families  
-- MLE implementations  
-
-<br>
-
----
-
-<!-- PROJECT 5 -->
-<h3 style="color:#fff;">🤖 5. AI Workflow Automation Library <i>(coming soon)</i></h3>
-
-<p style="color:#9ca3af;">
-Reusable building blocks for approvals, data checks, document parsing, and multi-agent automation —  
-my personal mini “Copilot Studio” written in Python.
-</p>
+- Gibbs sampler for Bayesian regression  
+- ARMA & ARCH family models  
+- Maximum likelihood estimators in Python & R  
 
 <br><br>
 
 ---
 
-<!-- ======================= -->
-<!--        FOOTER           -->
-<!-- ======================= -->
-
 <p align="center" style="color:#6b7280; font-size: 14px;">
-Built with passion — continuously evolving with new work in AI, quant, and analytics engineering.
+Built with curiosity and long-term thinking — continuously evolving with new work in AI, quant, and analytics engineering.
 </p>
