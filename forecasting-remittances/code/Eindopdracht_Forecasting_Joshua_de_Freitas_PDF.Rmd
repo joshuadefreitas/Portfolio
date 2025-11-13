@@ -1,0 +1,252 @@
+---
+title: "Eindopdracht - Predictive Modeling: Forecasting"
+author: "Joshua de Freitas"
+date: "2022-17-11"
+output: pdf_document
+keep_tex: yes
+csl: "european-journal-of-business-and-economics.csl"
+fontsize: 10
+bibliography: references.bib
+---
+
+```{r, include=FALSE, message=FALSE, echo=FALSE}
+# loading the necessary packages
+library(ggplot2)
+library(fpp3)
+library(forecast)
+library(tseries)
+```
+
+### Introduction
+Remittances to Mexico reached a record high in July, with Mexican families receiving $5.3 billion from abroad, an increase of 16.5% compared to the previous year [@BAN22]. For many developing economies, such as Mexico and the CADPR region (Central America, Panama, and the Dominican Republic), remittances are a vital source of funds, often surpassing official aid or foreign direct investment. Remittances can be defined as income received by households from foreign economies, primarily arising from the temporary or permanent movement of workers to those economies. This income can include cash, as well as non-cash items sent or given through formal channels, such as electronic cash transfers, or through informal channels, such as money or goods taken across borders [@BPM6]. \
+
+For this assignment, a univariate time series dataset from the Mexican central bank *Banco de Mexico* will be used to build forecasting models and make predictions about the amounts of future remittance that are received in Mexico. The dataset includes 334 *monthly* observations from January 1995 to August 2022, with the target variable **remittances** measured in millions of USD. An initial visualization of the data is shown in Figure 1 below. \
+
+```{r, fig.cap = "Remittances received in Mexico by month (Jan. 1995 to Aug. 2022)", fig.align='center', fig.height= 4, echo=FALSE}
+#library(ggfortify)
+# Removing redundant hashes
+knitr::opts_chunk$set(comment = NA)
+
+# loading the dataset
+# loading the necessary libraries
+library(readr)
+library(dplyr)
+
+# loading the dataset
+data <- read_csv("remittances.csv", col_names = FALSE)
+
+# Extract and set column names from the first row
+col_names <- data[1, ] %>%
+  separate(col = "X1", into = c("Year", "Month", "Period", "Remittances"), sep = ";") %>%
+  pull()
+
+# Skip the first row and split the remaining data
+data <- data %>%
+  slice(-1) %>%
+  separate(col = "X1", into = c("Year", "Month", "Period", "Remittances"), sep = ";")
+
+# Convert the Remittances column to numeric (remove commas and convert to numeric)
+data$Remittances <- as.numeric(gsub(",", "", data$Remittances))
+
+# Set column names
+colnames(data) <- col_names
+
+# Print the first few rows of the modified data
+head(data)
+
+
+# Plots a time series of worker remittances by month
+Y <- ts(data$remittances, start = c(1995,1), frequency = 12)
+
+# Plots a time series of worker remittances by month
+ts.plot(Y, ylab = "Millions of USD")
+```
+
+\newpage
+### Methodology
+To forecast future remittances to Mexico, the following steps will be taken: \
+**1.** The time series will be split into a training set and a test set. The training set will be used to estimate the parameters of the forecasting model, and the test set will be used to evaluate its predictions. \
+**2.** Plots of the autocorrelation function (ACF) and partial autocorrelation function (PACF) will be used to analyze the underlying trends and seasonal patterns of the series. These plots will also be used to identify the appropriate lag structure or order of the model terms. \
+**3.** Trends and seasonal patterns will be removed to make the time series stationary, after which the appropriate model terms will be identified using the ACF and PACF plots. \
+**4.** A first model will be estimated based on the training set and compared against alternative models. The best model will be chosen according to the relative quality measures and model accuracy measures. \
+**5.** The predictive power and accuracy of the final model will be evaluated on the test set, after which the final model will be re-estimated using the original time series to make future predictions for a period of 4 years (48 months).
+
+### 1. Splitting the time series: Training and test set
+As previously mentioned, the first step in constructing a model is to split the time series into a training set and a test set. The training set will be used to estimate the parameters of the forecasting model, and the test set will serve to evaluate its predictions. The following code performs this split, resulting in a training set containing **284** observations and a test set containing **48** observations. The test set therefore includes the final 48 months of the time series, allowing for the evaluation of the model's ability to forecast future values.  
+```{r, include=TRUE, comment=NA, echo=TRUE}
+test_size <- 48
+data_size <- length(Y)
+training_size <- data_size - test_size
+training <- head(Y, n = training_size)
+test <- tail(Y, n = test_size)
+```
+
+### 2. Analysis of trends and seasonality
+The previous graph in figure (1) showed a clear upward and exponentially growing trend in the time series as well as repeating seasonal patterns. While its momentum stagnated between 2007 and 2010, perhaps due to the impact of the global and US financial crisis, the exponential growth of the time series appears to be almost continuous. Furthermore, the variation of the time series also appears to be growing over time. These observations indicate that the time series does not appear to be stationary in both its mean and variation. This can also be analyzed more quantitatively using the *Augmented Dickey-Fuller Test*, as shown below.
+```{r, include=TRUE, warning=FALSE, echo=FALSE}
+# Performs the Augmented Dickey-Fuller Test to check for stationarity
+tseries::adf.test(training, k = 12)
+```
+
+The results of the ADF-test show that the p-value (0.917) is larger than the 5% significance level, suggesting that the time series variable is indeed non-stationary. \
+
+\newpage
+Since, many econometric forecasting models assume that the data on which they are applied is stationary (i.e. having a constant mean and variance), ACF and PACF plots are used to more closely analyze the underlying trends and seasonal patterns of the series. \
+
+```{r, fig.cap = "Autocorrelation function (ACF)", fig.align='center', fig.height= 3.5, echo=FALSE}
+Acf(training, lag.max = 48, main='', ylab='')
+```
+The autocorrelation function or ACF in figure (2) shows the degree of correlation between the time series and its lagged values and it helps to identify any significant autocorrelations that may be present in the data. In this case, the ACF decays slowly, suggesting that the series exhibits a long-term trend. The series also appears to spike each time after 12 lags, which likely indicates that there is a recurring annual seasonal pattern in the data. It will be important to account for these patterns in the next step of the analysis. \
+
+```{r, fig.cap = "Partial autocorrelation function (PACF)", fig.align='center', fig.height= 3.5, echo=FALSE}
+Pacf(training, lag.max = 48, main='', ylab='')
+```
+The partial autocorrelation function (PACF) is a measure of the correlation between a variable and its lagged values, taking into account the correlations of other lagged values. It can be used to identify the unique correlation between a variable and each individual lag, allowing for the detection of patterns and trends in the data that can be accounted for by incorporating these lags into a model. Figure (3) above shows significant correlations at the 1st, 2nd, and 5th lags, which may be used in modeling the data.
+
+\newpage
+### 3. Transformations of the time series
+As described in the previous section, the time series is clearly non-stationary as it exhibits a strong upward trend as well as recurring (annual) seasonality, as was shown in figure (1). In order to make the time series more stationary, a log-transformation of the series is first applied to stabilize its variation. This is done in order to prevent biased or incorrect estimates. \
+
+```{r, fig.cap = "Log remittances received in Mexico by month", fig.align='center', fig.height= 3.8, echo=FALSE}
+# plots the log of the dataset
+training.log <- log(training)
+ts.plot(training.log, ylab = "Remittances (log)")
+```
+Taking the log of the time series now reveals a more linear and stable variation, which is consistent with our desired expectation. The next step involves taking a first difference, meaning that the changes in monthly values are used to construct a model instead of the actual individual observations. As a result, the long-term effects of the identified trend are removed, which in turn helps to reveal the underlying pattern of the series as well as highlight any short term fluctuations.
+```{r, fig.cap = "First difference of the log remittances received in Mexico by month", echo=FALSE, fig.align='center', fig.height= 3.8}
+# plots the first difference of the log of the dataset
+training.log.diff <- diff(training.log)
+ts.plot(training.log.diff, ylab = "First difference of the log")
+```
+
+\newpage
+In addition to removing the trend in the time series, it is also necessary to account for the observed seasonality patterns. One way to achieve this is by taking a seasonal difference on top the initial first difference. As a result, the influence of recurring seasonality is effectively accounted for. This is shown in figure (5) below.
+```{r, fig.cap = "First difference of the log remittances received in Mexico by month", echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height= 4}
+# Adjusting for seasonality
+training.final <- diff(training.log.diff, lag = 12)
+
+# Plots the resulting series after adjusting for seasonality
+ts.plot(training.final, ylab = "Adjusted for seasonality")
+```
+
+After performing these transformations, the time series now appears to be stationary. This is also confirmed by the ADF-test, where the P-value (0.01) is now much lower than the 5% significance level, as shown below.
+
+```{r, include=TRUE, warning=FALSE, echo=FALSE}
+# Performs the Augmented Dickey-Fuller Test to check for stationarity
+tseries::adf.test(training.final, k = 12)
+```
+
+### 4. Model identification and comparison
+Now that the time series has been made stationary, an important assumption for using ARIMA-models, a first model can be constructed to fit the training data. To do this, ACF and PACF plots are analyzed to identify the appropriate order of the model terms (p, d, q), where **p** refers to the autoregressive process(es), **d** to the number of differences that have been applied, and **q** to the moving average process(es). However, these terms refer to the *non-seasonal* factors of the ARIMA model. To extend this model, seasonal components, **P**, **D** and **Q** are included, where P and Q incorporate the seasonal factors and D refers to the number of seasonal differences that have been applied. Given that a first difference as well as a seasonal difference have been applied on the series, both d and D are set to 1. \
+
+\newpage
+```{r, fig.cap = "Autocorrelation function (ACF)", fig.align='center', fig.height= 3.5, echo=FALSE}
+Acf(training.final, lag.max = 72, main='', ylab='')
+```
+The ACF plot shows significant autocorrelations at the 1st and 2nd lag, suggesting either a non-seasonal MA(1) or MA(2) process. The significant spike at the 12th lag may suggests a seasonal MA(1) component because the time series contains monthly intervals. 
+```{r, fig.cap = "Partial autocorrelation function (PACF)", fig.align='center', fig.height= 3.5, echo=FALSE}
+Pacf(training.final, lag.max = 72, main='', ylab='')
+```
+Similarly, the PACF plot also shows significant autocorrelations at the 1st and 2nd lag as well as at the 12th lag, indicating a non-seasonal AR(1) or AR(2) process and a seasonal AR(1) process. Based on these observations, the resulting ARIMA-model can thus be identified as **ARIMA(2, 1, 2)(1, 1, 1)12**.\
+
+The summary statistics for this seasonal ARIMA-model below show the estimated coefficients and standard errors of the model parameters along with the measures of the relative quality of model (AIC, AICc and BIC). The lower these scores, for instance in the case of the AIC-metric, the better the model is able to capture or fit the training data.  \
+
+\newpage
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Estimation of the ARIMA-model
+m1 <- Arima(training, order = c(2, 1, 2), seasonal = c(0, 1, 1))
+print(m1)
+```
+In this case, the AIC is equal to **3336.06**. To compare this result against other model specifications, three alternative models are estimated below:
+```{r, message=FALSE, message=FALSE, warning=FALSE, echo=TRUE}
+# Comparison of Alternative models based on relative quality measure (AIC)
+
+# ARIMA(0,1,1)(1,1,1)12
+m2 <- Arima(training, order = c(0, 1, 1), seasonal = c(1 ,1, 1))
+c('AIC:', round(AIC(m2), 2)) 
+
+# ARIMA(0,1,2)(0,1,1)12
+m3 <- Arima(training, order = c(0, 1, 2), seasonal = c(0, 1, 1))
+c('AIC:', round(AIC(m3), 2)) 
+
+# ARIMA(1,1,1)(0,1,1)12
+m4 <- Arima(training, order = c(1, 1, 2), seasonal = c(0, 1, 1))
+c('AIC:', round(AIC(m4), 2)) 
+```
+Based on a comparison of the AIC-metric, the last model **ARIMA(1,1,2)(0,1,1)12** provides the best fit to the training data. In addition to comparing the relative quality of the models using the AIC, a comparison is made based on the model accuracy measures (ME, RMSE, MAE, MPE, MAPE, MASE, ACF1).
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Comparison of model accuracy measures (ME, RMSE, MAE, MPE, MAPE, MASE, ACF1)
+
+# ARIMA(2,1,2)(0,1,1)12
+m1.test <- Arima(test, model=m1)
+print("Model accuracy measures ARIMA(2,1,2)(0,1,1)12")
+accuracy(m1.test)
+
+# ARIMA(0,1,1)(1,1,1)12
+m2.test <- Arima(test, model=m2)
+print("Model accuracy measures ARIMA(0,1,1)(1,1,1)12")
+accuracy(m2.test)
+
+```
+
+\newpage
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# ARIMA(0,1,2)(0,1,1)12
+m3.test <- Arima(test, model=m3)
+print("Model accuracy measures ARIMA(0,1,2)(0,1,1)12")
+accuracy(m3.test)
+
+# ARIMA(1,1,1)(0,1,1)12
+m4.test <- Arima(test, model=m4)
+print("Model accuracy measures ARIMA(1,1,1)(0,1,1)12")
+accuracy(m4.test)
+```
+A comparison of the accuracy measures also reveals that **ARIMA(1,1,2)(0,1,1)12** is the preferred model, since it provides the most accurate predictions on the test set out of all four models according to these measures.
+
+The resulting summary statistics of this model, i.e. the estimated coefficients and standard errors along with the relative quality measures and model accuracy measures are again shown below in more detail:
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Estimation of the ARIMA-model
+m4 <- Arima(training, order = c(1, 1, 2), seasonal = c(0, 1, 1))
+summary(m4)
+```
+
+The following graph in figure (9) plots the fitted values of the model (blue line) against the original observations (black line). 
+```{r, fig.cap = "Fitted values vs. Original observations", echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height= 3.5}
+# Plots the fitted values against the observed values
+plot(training, ylab='Remittances in millions of USD')
+lines(fitted(m4), col='blue')
+```
+\newpage
+While the model does not provide a perfect fit to the data, which is also undesirable due to the problem of *overfitting*, it does decently capture the overall trend of the time series as well as the short-term fluctuations within each year. The next graph in figure (10) plots the predicted values and confidence intervals of the remaining 48 months of the series (in blue) along with the actual values of the test set (in orange). 
+```{r, fig.cap = "Predicted values based on the training set (h=48)", echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height= 3.5}
+# Plots the fitted values against the original observations
+autoplot(forecast(m4, h=48), ylab='Remittances in millions of USD', main='') + autolayer(test) + theme_bw()
+```
+It is clear that the model is well able to make predictions on the first few months of the test set as the blue and orange lines are very close to on another and the original observations fall within the range of the confidence intervals of the forecasts. However there is a sudden strong increase in the amount of remittances in the year 2021, after which the model predictions and the observations in the test set begin to grow more apart. Nevertheless, the model can be regarded as a useful model to make accurate predictions. The model can now be used to make forecasts of future values after it has been re-estimated on the entire dataset, which will be done in the next step. 
+
+### 5. Forecasting future values
+The model will now be re-estimated on the entire dataset to make predictions on future values, namely on the upcoming 48 months. The resulting summary statistics of the re-estimation of the **ARIMA(1,1,2)(0,1,1)12** model are shown below. \
+```{r, message=FALSE, message=FALSE, warning=FALSE, echo=FALSE}
+final <- Arima(Y, order = c(1, 1, 2), seasonal = c(0, 1, 1))
+summary(final)
+```
+The next graph plots the predictions on future values (i.e. values after August 2022) based on the entire dataset.
+```{r, fig.cap = "Predicted values based on the complete set (h=48)", echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height= 3.5}
+# Plots the the predictions on future values (48 months)
+autoplot(forecast(final, h=48), ylab='Remittances in millions of USD', main='') + theme_bw()
+```
+The model predictions on the future 48 months are depicted by the blue line along with their 95% confidence intervals (light blue range) and 80% confidence intervals (dark blue range). The actual point forecasts for each future value along with their 95% and 80% confidence intervals are shown below.
+\newpage
+```{r, message=FALSE, message=FALSE, warning=FALSE, echo=FALSE}
+forecast(final, h=48)
+```
+
+\newpage
+
+
+## References
+
+<div id="refs"></div>
+
+
+
