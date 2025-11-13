@@ -1,4 +1,13 @@
 <p align="center">
+<<<<<<< HEAD
+=======
+  <img src="./banner.png" width="85%" alt="Joshua de Freitas — Data & AI Portfolio Banner"/>
+</p>
+
+<br>
+
+<p align="center">
+>>>>>>> c2aa2c0 (Add visual banner to portfolio)
   <img src="https://user-images.githubusercontent.com/placeholder/banner.png" width="80%" />
 </p>
 
