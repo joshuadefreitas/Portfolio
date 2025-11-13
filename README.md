@@ -103,6 +103,8 @@ Inspired by research such as <i>DeepLOB</i>, this project combines market micros
 - GPU-accelerated training & evaluation  
 - Signal backtesting over short horizons  
 
+🔗 <a href="./deep-lob" style="color:#f97316;">View project folder →</a>
+
 <br>
 
 ---
@@ -116,11 +118,13 @@ holding, and liquidation decisions under risk constraints.
 </p>
 
 **Planned components:**
-- Custom trading environment (Gym-style)  
-- State space with returns, volatility, microstructure features  
+- Custom Gym-style trading environment  
+- State space with returns, volatility, and microstructure features  
 - PPO / SAC agent implementations  
 - Reward shaping for Sharpe, drawdown, and slippage  
 - Evaluation vs. simple benchmark strategies  
+
+🔗 <a href="./rl-futures-agent" style="color:#f97316;">View project folder →</a>
 
 <br>
 
@@ -136,9 +140,11 @@ price paths, volatility regimes, and stress scenarios for backtesting and risk r
 
 **Planned components:**
 - GAN- or diffusion-based time series generator (PyTorch)  
-- Regime-aware modeling (calm vs stress periods)  
+- Regime-aware modeling and conditioning  
 - Metrics for realism and calibration  
 - Use cases for backtest robustness & scenario analysis  
+
+🔗 <a href="./generative-market-simulator" style="color:#f97316;">View project folder →</a>
 
 <br>
 
@@ -156,6 +162,8 @@ A curated collection of mathematical modeling notebooks demonstrating statistica
 - Gibbs sampler for Bayesian regression  
 - ARMA & ARCH family models  
 - Maximum likelihood estimators in Python & R  
+
+🔗 <a href="./statistical-modeling-suite" style="color:#f97316;">View project folder →</a>
 
 <br><br>
 
