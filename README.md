@@ -1,174 +1,153 @@
 <p align="center">
-  <img src="./Banner.png" width="88%" style="border-radius: 12px;" alt="Joshua de Freitas — Data & AI Portfolio Banner"/>
+  <img src="./Banner.png" width="85%" alt="Joshua de Freitas — Data & AI Portfolio Banner"/>
 </p>
-
-<br><br>
-
-<h1 align="center" style="color:#f97316; font-weight:800; font-size: 42px;">
-  Joshua de Freitas
-</h1>
-
-<h3 align="center" style="color:#d1d5db; font-size: 20px; font-weight:400;">
-  Data Scientist · Analytics Engineer · AI Workflow Architect
-</h3>
 
 <br>
-
-<p align="center" style="max-width: 700px; color:#9ca3af; font-size: 16px;">
-  Welcome to my personal portfolio — a curated collection of work that blends 
-  <strong style="color:#f97316;">statistics</strong>, 
-  <strong style="color:#f97316;">finance</strong>, 
-  <strong style="color:#f97316;">data engineering</strong>, and 
-  <strong style="color:#f97316;">applied AI</strong> into practical, functional systems.
-</p>
-
-<br><br>
-
----
-
-<h2 style="color:#f97316;">⚙️ Tech Stack</h2>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Python-1a1a1a?style=for-the-badge&logo=python&logoColor=f97316" />
-  <img src="https://img.shields.io/badge/R-1a1a1a?style=for-the-badge&logo=r&logoColor=skyblue" />
-  <img src="https://img.shields.io/badge/SQL-1a1a1a?style=for-the-badge&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/FastAPI-1a1a1a?style=for-the-badge&logo=fastapi&logoColor=white" />
-  <img src="https://img.shields.io/badge/Scikit--Learn-1a1a1a?style=for-the-badge&logo=scikitlearn&logoColor=f97316" />
-  <img src="https://img.shields.io/badge/ETL_Pipelines-1a1a1a?style=for-the-badge&logoColor=white" />
+
+# Joshua de Freitas  
+### Data Scientist · Analytics Engineer · AI Workflow Builder  
+
+Crafting data & AI solutions across **time series**, **financial microstructure**, and **document intelligence**.
+
 </div>
 
-<br><br>
+---
+
+## 🧠 What I Work On
+
+- **Statistical & ML modeling** – time series, classification, forecasting  
+- **Analytics engineering** – SQL, ELT pipelines, semantic models, Power BI  
+- **Applied AI systems** – LLM-powered workflows, APIs, automation around data  
+
+I like projects that go **end-to-end**: from raw data → modeling → APIs → something real people can use.
 
 ---
 
-<h2 style="color:#f97316;">📂 Featured Projects</h2>
+## 🛠️ Tech Stack
 
-<br>
-
-<!-- PROJECT 1 -->
-<h3 style="color:#fff;">📈 1. Time Series Forecasting — Remittances to Mexico</h3>
-
-<p style="color:#9ca3af;">
-A full forecasting workflow analyzing monthly remittance flows to Mexico.  
-<b style="color:#f97316;">Tools:</b> R, forecast, tidyverse  
-<b style="color:#f97316;">Techniques:</b> SARIMA, decomposition, uncertainty modeling  
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" />
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Time%20Series-00A8E8?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Data%20Pipelines-555555?style=for-the-badge" />
 </p>
-
-🔗 <a href="./forecasting-remittances" style="color:#f97316;">View project folder →</a>
-
-<br><br>
 
 ---
 
-<!-- PROJECT 2 -->
-<h3 style="color:#fff;">🧠 2. AI Document Intelligence Platform — Invoice & Contract Processing <i>(in progress)</i></h3>
-
-<p style="color:#9ca3af;">
-A modular data + AI platform combining ETL pipelines, document intelligence, analytics, 
-and a FastAPI backend. Built as the foundation for a scalable enterprise document automation system.  
-</p>
-
-**Built so far:**
-- Database schema (SQLAlchemy)  
-- ETL ingestion + validation  
-- Synthetic invoice generator  
-- Full API v1 spec  
-- FastAPI backend live locally  
-- SQLite → Postgres-ready  
-
-**Coming next:**
-- LLM-based invoice parsing  
-- Automated payment advice generation  
-- RAG compliance engine  
-- Streamlit operational dashboard  
-
-🔗 <a href="./ai-document-platform" style="color:#f97316;">View project folder →</a>
-
-<br><br>
+## 📂 Featured Projects
 
 ---
 
-<!-- PROJECT 3 -->
-<h3 style="color:#fff;">📉 3. DeepLOB — Deep Learning on Limit Order Books <i>(coming soon)</i></h3>
+### 📈 1. Time Series Forecasting — Remittances to Mexico
 
-<p style="color:#9ca3af;">
-A deep learning model to forecast short-horizon mid-price movements using limit order book (LOB) data.  
-Inspired by research such as <i>DeepLOB</i>, this project combines market microstructure with modern deep learning.
-</p>
+**Goal:** Forecast remittance flows using classical time series techniques.  
+**Keywords:** SARIMA, stationarity, seasonality, forecasting horizon, diagnostics  
 
-**Planned components:**
-- LOB tensor construction (multi-level bid/ask snapshots)  
-- PyTorch dataset & dataloader pipeline  
-- CNN + LSTM / Temporal CNN architectures  
-- GPU-accelerated training & evaluation  
-- Signal backtesting over short horizons  
+**Highlights:**
 
-🔗 <a href="./deep-lob" style="color:#f97316;">View project folder →</a>
+- Exploratory analysis of remittance series (trend, seasonality, volatility)
+- Model selection via ACF/PACF and information criteria
+- SARIMA-based forecasting with residual diagnostics
 
-<br>
+🔗 **Project folder:** [`forecasting-remittances`](./forecasting-remittances)  
+📄 `code/` – RMarkdown with full analysis & code  
+📊 `report/` – PDF report of methods and findings  
 
 ---
 
-<!-- PROJECT 4 -->
-<h3 style="color:#fff;">🤖 4. Reinforcement Learning Agent for Futures Trading <i>(coming soon)</i></h3>
+### 🧾 2. AI Document Intelligence Platform (Invoices)
 
-<p style="color:#9ca3af;">
-An RL-based agent that interacts with a simulated futures market environment to learn position-taking, 
-holding, and liquidation decisions under risk constraints.
-</p>
+**Goal:** Build the backbone of an **AI-ready document platform** for finance teams — starting with invoices.
 
-**Planned components:**
-- Custom Gym-style trading environment  
-- State space with returns, volatility, and microstructure features  
-- PPO / SAC agent implementations  
-- Reward shaping for Sharpe, drawdown, and slippage  
-- Evaluation vs. simple benchmark strategies  
+**What it does now:**
 
-🔗 <a href="./rl-futures-agent" style="color:#f97316;">View project folder →</a>
+- Generates **synthetic invoice data** and loads it into a structured database
+- Creates **clean analytical tables** (vendors, invoices, amounts, dates, status)
+- Defines an initial **API spec** for querying invoices and building AI workflows on top
 
-<br>
+**Stack:**
 
----
+- **Backend & Data:** Python, SQLite (swappable to Postgres), SQLAlchemy, pandas  
+- **Structure:**
+  - `data/sample_invoices.csv` – synthetic invoice dataset
+  - `backend/pipeline/` – ETL pipeline to load & normalize invoices
+  - `backend/api/` – FastAPI app skeleton (v1 spec in `docs/api_v1_spec.md`)  
 
-<!-- PROJECT 5 -->
-<h3 style="color:#fff;">🌌 5. Generative Market Simulator — GANs & Diffusion for Synthetic Time Series <i>(coming soon)</i></h3>
+🔗 **Project folder:** [`ai-document-platform`](./ai-document-platform)  
 
-<p style="color:#9ca3af;">
-A generative modeling project for financial markets, using deep generative models to create realistic synthetic 
-price paths, volatility regimes, and stress scenarios for backtesting and risk research.
-</p>
-
-**Planned components:**
-- GAN- or diffusion-based time series generator (PyTorch)  
-- Regime-aware modeling and conditioning  
-- Metrics for realism and calibration  
-- Use cases for backtest robustness & scenario analysis  
-
-🔗 <a href="./generative-market-simulator" style="color:#f97316;">View project folder →</a>
-
-<br>
+This project is designed as a foundation for:
+- LLM-powered invoice Q&A  
+- Automated approval flows  
+- Spend analytics over invoices, vendors, and categories  
 
 ---
 
-<!-- PROJECT 6 -->
-<h3 style="color:#fff;">🔍 6. Statistical Modeling Suite <i>(coming soon)</i></h3>
+### 📘 3. DeepLOB — Deep Learning on Limit Order Book Data
 
-<p style="color:#9ca3af;">
-A curated collection of mathematical modeling notebooks demonstrating statistical rigor and clarity.  
-</p>
+**Goal:** Recreate a **DeepLOB-style** pipeline that predicts short-horizon price moves from limit order book (LOB) data.
 
-**Planned modules:**
-- Logistic regression from scratch  
-- Gibbs sampler for Bayesian regression  
-- ARMA & ARCH family models  
-- Maximum likelihood estimators in Python & R  
+**What it includes:**
 
-🔗 <a href="./statistical-modeling-suite" style="color:#f97316;">View project folder →</a>
+- **LOB Simulator:**  
+  Synthetic limit order book generator with mid-price, bid/ask levels and sizes  
+  → `src/deep_lob/simulator.py`
 
-<br><br>
+- **Windowed Tensor Builder:**  
+  Converts raw LOB snapshots into sliding windows  
+  - Input: `data/raw/simulated_lob.csv`  
+  - Output: `data/processed/lob_windows.npz`  
+  → `src/deep_lob/data.py`
 
----
+- **PyTorch Pipeline:**  
+  - `DeepLOBDataset` → wraps precomputed windows & labels  
+  - `DeepLOBModel` →  
+    - Inception-style 1D convolutions across time  
+    - LSTM on top of learned features  
+    - 3-way classifier: up / flat / down  
+  - `train.py` → full training loop with train/validation split, accuracy tracking, model checkpointing (`models/deeplob_synthetic.pt`)
 
-<p align="center" style="color:#6b7280; font-size: 14px;">
-Built with curiosity and long-term thinking — continuously evolving with new work in AI, quant, and analytics engineering.
-</p>
+**Quick structure:**
+
+```bash
+deep-lob/
+├── data/
+│   ├── raw/          # simulated LOB
+│   └── processed/    # sliding-window tensors (X, y)
+├── src/
+│   └── deep_lob/
+│       ├── simulator.py   # synthetic LOB generator
+│       ├── data.py        # window builder
+│       ├── dataset.py     # PyTorch Dataset
+│       ├── models.py      # DeepLOB-style model
+│       └── train.py       # training loop
+└── models/
+    └── deeplob_synthetic.pt
+    
+🔗 Project folder: deep-lob￼
+
+This project showcases:
+    •    Data simulation for financial microstructure
+    •    Tensorisation of high-frequency LOB data
+    •    A research-style deep learning architecture implemented end-to-end
+
+⸻
+
+🌱 Coming Next
+
+Planned additions to this portfolio:
+    •    More realistic LOB datasets & metrics (F1, confusion matrices, basic backtests)
+    •    Quant-oriented models for futures / FX returns
+    •    More end-to-end AI workflows around finance and operational data
+
+⸻
+
+📫 Contact
+
+If you’re interested in the technical details or potential collaboration:
+    •    GitHub: @joshuadefreitas￼
+
+Always open to conversations at the intersection of data, finance, and AI systems.
