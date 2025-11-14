@@ -5,8 +5,7 @@
 # 🧠 Joshua de Freitas  
 ### Data Scientist · Quantitative Analytics Engineer · AI Systems Builder  
 
-This portfolio collects the work I do across **deep learning**, **market microstructure**, **forecasting**, and **data engineering** – with a strong interest in **quantitative finance** and **econometric modeling**.  
-Everything is crafted in production-ready code. Feel free to test it out!
+This portfolio collects the work I do across **deep learning**, **market microstructure**, **forecasting**, and **data engineering** – with a strong interest in **quantitative finance** and **econometric modeling**. Everything is crafted in production-ready code. Feel free to test it out!
 
 You can also visit my website: **[joshuadefreitas.github.io](https://joshuadefreitas.github.io)**
 
