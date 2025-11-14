@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./logo.png" width="85%" alt="Joshua de Freitas — Data, AI & Markets Portfolio Banner"/>
+  <img src="./logo-small.png" width="85%" alt="Joshua de Freitas — Data, AI & Markets Portfolio Banner"/>
 </p>
 
 # 🧠 Joshua de Freitas  
