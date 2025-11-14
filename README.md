@@ -1,19 +1,22 @@
 <p align="center">
-  <img src="./Banner.png" width="85%" alt="Joshua de Freitas — Data & AI Portfolio Banner"/>
+  <img src="./Banner.png" width="85%" alt="Joshua de Freitas — Data, AI & Markets Portfolio Banner"/>
 </p>
 
 # 🧠 Joshua de Freitas  
-### Data Scientist · Analytics Engineer · AI Systems Builder  
+### Data Scientist · Quantitative Analytics Engineer · AI Systems Builder  
 
-This portfolio collects the work I do across **deep learning**, **market microstructure**, **forecasting**, and **data engineering**.  
-Everything is crafted with research-grade structure and production-grade code.
+This portfolio collects the work I do across **deep learning**, **market microstructure**, **forecasting**, and **data engineering** – with a strong interest in **quantitative finance** and **econometric modeling**. Everything is crafted in production-ready code. 
+Feel free to explore my work and test it out!
+
+You can also visit my website: **[joshuadefreitas.github.io](https://joshuadefreitas.github.io)**
 
 ---
 
 # 🚀 Featured Projects
 
 ## 1. Time Series Forecasting – Remittances to Mexico  
-A full SARIMA-based forecasting study.  
+A full SARIMA-based forecasting study of monthly remittance flows to Mexico, from exploration and diagnostics to uncertainty discussion.  
+**Focus:** Econometric time series, model diagnostics, scenario thinking  
 **Tools:** R, forecast, stats, ggplot2  
 
 🔗 **[View project →](./forecasting-remittances/)**
@@ -22,18 +25,18 @@ A full SARIMA-based forecasting study.
 
 ## 2. AI Document Platform (Invoice & Contract Intelligence)  
 Ingestion → ETL → SQL/SQLite → API layer → Analytics.  
-A production-style architecture designed like a real startup MVP.  
+A production-style architecture designed like a real startup MVP for **financial operations**, **invoicing**, and **contract compliance** – ready to plug in LLMs for document understanding and checks.  
 
 🔗 **[View project →](./ai-document-platform/)**
 
 ---
 
 ## 3. DeepLOB – Deep Learning on Limit Order Book Data  
-A full ML system for microstructure prediction:  
+A full ML system for **microstructure prediction** on synthetic LOB data:  
 - Synthetic LOB generator  
-- Sliding window tensorizer  
-- CNN + Inception + LSTM model  
-- Trainer & evaluation pipeline  
+- Sliding-window tensorizer (100 × 15 features)  
+- CNN + Inception + LSTM and TCN architectures  
+- Evaluation pipeline + naive long/short backtest  
 
 🔗 **[View project →](./deep-lob/)**
 
@@ -44,10 +47,10 @@ A full ML system for microstructure prediction:
 A Gym-compatible RL agent that learns optimal futures trading behaviour under risk constraints.
 
 **Planned:**
-- Custom environment  
+- Custom futures trading environment  
 - PPO & SAC agents  
 - Reward shaping: Sharpe, drawdown, slippage  
-- Benchmark comparisons  
+- Benchmark comparisons against simple rules  
 
 ---
 
@@ -56,38 +59,40 @@ A Gym-compatible RL agent that learns optimal futures trading behaviour under ri
 Generative models for synthetic price series, volatility regimes, and stress scenarios.
 
 **Planned:**
-- GAN or diffusion model  
-- Regime-aware sampling  
-- Calibration metrics  
+- GAN or diffusion-based time series generator  
+- Regime-aware sampling (calm, trending, stress)  
+- Realism & calibration metrics  
 - Backtesting under synthetic scenarios  
 
 ---
 
 ### 🔍 6. Statistical Modeling Suite *(coming soon)*
 
-A collection of mathematically rigorous notebook-based projects.
+A collection of mathematically rigorous, didactic notebook-based projects.
 
 **Planned:**
 - Logistic regression from scratch  
 - Gibbs sampler for Bayesian regression  
-- ARMA/ARCH family  
+- ARMA / ARCH family models  
 - Maximum likelihood estimators in Python & R  
 
 ---
 
 # 🧰 Skills & Tools
+
 - Python, R, SQL  
 - PyTorch, scikit-learn  
-- Time series modeling  
+- Time series & econometric modeling  
 - Data engineering & ETL  
-- API design  
-- Microservice architecture  
-- Financial modeling & market microstructure  
+- API & backend design (FastAPI, SQLAlchemy)  
+- Microservice-style architectures  
+- Financial data, market microstructure, backtesting  
 
 ---
 
 # 📬 Contact
-Feel free to reach out if you’re curious about any project or want to collaborate.
+
+Feel free to reach out if you’re curious about any project, want to discuss **data & AI in finance**, or explore collaboration.
 
 <br>
 
